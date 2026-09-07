@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>P.A.P — Planejados de Alta Performance | Móveis Planejados na Baixada Santista</title>
+<meta name="description" content="Móveis planejados sob medida na Baixada Santista — SP. Projetos de alto padrão com precisão em cada detalhe. P.A.P — Planejados de Alta Performance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black: #0a0a0a;
+    --graphite: #17171689;
+    --charcoal: #2a2a28;
+    --off-white: #f2efe8;
+    --metal: #9a988f;
+    --metal-dim: #56554d;
+    --line: rgba(242,239,232,0.14);
+    --line-dark: rgba(10,10,10,0.12);
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth; overflow-x:hidden; max-width:100%;}
+
+  body{
+    background: var(--off-white);
+    color: var(--black);
+    font-family:'Inter', -apple-system, sans-serif;
+    font-weight:400;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Sora', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  button{font-family:inherit;border:none;background:none;cursor:pointer;}
+
+  .wrap{
+    width:100%;
+    padding:0 24px;
+  }
+
+  .label{
+    font-family:'Inter', sans-serif;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    color: var(--metal-dim);
+  }
+  .label.on-dark{color: var(--metal);}
+
+  .num{
+    font-family:'Sora', sans-serif;
+    font-weight:300;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform: translateY(18px);
+    transition: opacity .9s var(--ease), transform .9s var(--ease);
+  }
+  .reveal.is-visible{opacity:1; transform:none;}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ================= HEADER ================= */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    padding: 18px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition: background .5s var(--ease), padding .4s var(--ease), border-color .5s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  header.solid{
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .logo{
+    font-family:'Sora', sans-serif;
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:0.02em;
+    color: var(--off-white);
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+  }
+  .logo span{
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:7.5px;
+    letter-spacing:0.16em;
+    color: var(--metal);
+    margin-top:4px;
+  }
+
+  .menu-btn{
+    color: var(--off-white);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.12em;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .menu-btn .bars{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .menu-btn .bars i{
+    display:block;
+    width:18px;
+    height:1px;
+    background: var(--off-white);
+  }
+
+  /* mobile nav drawer */
+  .nav-drawer{
+    position:fixed;
+    inset:0;
+    background: var(--black);
+    z-index:200;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding: 24px 32px;
+    transform: translateY(-100%);
+    transition: transform .55s var(--ease);
+  }
+  .nav-drawer.open{transform:translateY(0);}
+  .nav-drawer .close-btn{
+    position:absolute;
+    top:20px; right:24px;
+    color:var(--off-white);
+    font-size:13px;
+    letter-spacing:0.12em;
+    font-weight:600;
+  }
+  .nav-drawer ul{list-style:none;}
+  .nav-drawer li{
+    border-top:1px solid var(--line);
+    padding: 20px 0;
+  }
+  .nav-drawer li:last-child{border-bottom:1px solid var(--line);}
+  .nav-drawer a{
+    font-family:'Sora', sans-serif;
+    font-size:28px;
+    font-weight:500;
+    color: var(--off-white);
+  }
+  .nav-drawer .drawer-foot{
+    margin-top:40px;
+    color: var(--metal);
+    font-size:13px;
+    letter-spacing:0.08em;
+  }
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    background: linear-gradient(180deg, #0d0d0c 0%, #131311 40%, #1a1a17 100%);
+    overflow:hidden;
+  }
+  .hero-photo{
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(120% 90% at 78% 8%, rgba(255,255,255,0.05), transparent 55%),
+      linear-gradient(200deg, #050505 0%, #14140f 38%, #232019 62%, #302c22 100%);
+  }
+  .hero-photo img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter: grayscale(0.1) contrast(1.08) brightness(0.82);
+  }
+  .hero-photo::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 68px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 68px);
+    mix-blend-mode: overlay;
+  }
+  .hero-photo::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 32%, rgba(6,6,5,0.96) 100%);
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    padding: 0 24px 44px;
+  }
+  .hero-eyebrow{
+    color: var(--metal);
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:0.16em;
+    margin-bottom:18px;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+  }
+  .hero h1{
+    color: var(--off-white);
+    font-size: clamp(36px, 10vw, 50px);
+    font-weight:600;
+    margin-bottom:20px;
+  }
+  .hero p.sub{
+    color: rgba(242,239,232,0.72);
+    font-size:15.5px;
+    max-width:30ch;
+    margin-bottom:34px;
+  }
+  .btn-primary{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background: var(--off-white);
+    color: var(--black);
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:0.1em;
+    padding: 17px 26px;
+    width:100%;
+    justify-content:center;
+    transition: background .3s var(--ease), transform .3s var(--ease);
+  }
+  .btn-primary:active{transform: scale(0.98);}
+  .btn-primary:hover{background:#fff;}
+
+  .hero-foot{
+    margin-top:26px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color: var(--metal);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.12em;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+  }
+  .hero-foot .dot{width:4px;height:4px;background:var(--metal);border-radius:50%;}
+
+
+  /* ================= SECTION SHELL ================= */
+  section{position:relative;}
+  .sec-pad{padding: 100px 0 96px;}
+  .sec-pad-tight{padding: 84px 0;}
+
+  .kicker{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:26px;
+  }
+  .kicker .rule{width:28px;height:1px;background: var(--metal-dim);}
+  .kicker .label{}
+
+  h2.sec-title{
+    font-size: clamp(28px, 8vw, 38px);
+    margin-bottom:22px;
+    max-width:14ch;
+  }
+  .sec-body{
+    color:#4a4a46;
+    font-size:15.5px;
+    max-width:34ch;
+  }
+
+  /* ================= MARCA ================= */
+  .marca{background: var(--off-white);}
+  .marca-photo{
+    margin-top:56px;
+    position:relative;
+    aspect-ratio: 4/5;
+    background: #1c1a15;
+    overflow:hidden;
+  }
+  .marca-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter: contrast(1.05);
+  }
+  .marca-photo::before{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 38%);
+  }
+  .marca-photo .cap{
+    position:absolute;
+    left:20px; bottom:20px;
+    color: var(--off-white);
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.12em;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  }
+
+  /* ================= PROJETOS GALLERY ================= */
+  .projetos{background:#111110;}
+  .projetos .kicker .label, .projetos h2, .projetos .sec-body{color: var(--off-white);}
+  .projetos .sec-body{color: rgba(242,239,232,0.62);}
+  .projetos .kicker .rule{background: var(--metal);}
+
+  .gallery{
+    margin-top:44px;
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    padding: 0 24px 20px;
+    margin-left:-24px;
+    margin-right:-24px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width:none;
+  }
+  .gallery::-webkit-scrollbar{display:none;}
+  .gcard{
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+  .gcard .frame{
+    aspect-ratio: 3/4;
+    position:relative;
+    overflow:hidden;
+    background:#161511;
+  }
+  .gcard .frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition: transform .6s var(--ease);
+  }
+  .gcard .frame::before{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 45%);
+  }
+  .gcard .meta{
+    margin-top:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .gcard .meta .title{
+    color: var(--off-white);
+    font-family:'Sora', sans-serif;
+    font-size:13.5px;
+    font-weight:600;
+    letter-spacing:0.04em;
+  }
+  .gcard .meta .place{
+    color: var(--metal-dim);
+    font-size:11px;
+    letter-spacing:0.06em;
+  }
+  /* ================= DIFERENCIAIS ================= */
+  .diferenciais{background: var(--off-white);}
+  .dlist{margin-top:50px;}
+  .ditem{
+    padding: 32px 0;
+    border-top: 1px solid var(--line-dark);
+    display:flex;
+    gap:22px;
+    align-items:flex-start;
+  }
+  .ditem:last-child{border-bottom: 1px solid var(--line-dark);}
+  .ditem .num{
+    font-size:34px;
+    color:#c9c5b8;
+    line-height:1;
+    min-width:52px;
+  }
+  .ditem h3{
+    font-size:16.5px;
+    margin-bottom:8px;
+    font-weight:600;
+  }
+  .ditem p{
+    color:#57564f;
+    font-size:14.5px;
+    max-width:32ch;
+  }
+
+  /* ================= PROCESSO ================= */
+  .processo{background:#141412;}
+  .processo .kicker .label{color: var(--metal);}
+  .processo .kicker .rule{background: var(--metal);}
+  .processo h2{color: var(--off-white);}
+  .ptimeline{margin-top:52px;position:relative;}
+  .ptimeline::before{
+    content:"";
+    position:absolute;
+    left:23px; top:6px; bottom:6px;
+    width:1px;
+    background: var(--line);
+  }
+  .pstep{
+    position:relative;
+    padding-left:64px;
+    padding-bottom:44px;
+  }
+  .pstep:last-child{padding-bottom:0;}
+  .pstep .num{
+    position:absolute;
+    left:0; top:-4px;
+    font-size:20px;
+    color: var(--metal);
+    background:#141412;
+    width:46px;
+  }
+
+  .pstep h3{
+    color: var(--off-white);
+    font-size:16px;
+    margin-bottom:6px;
+    font-weight:600;
+    letter-spacing:0.03em;
+  }
+  .pstep p{
+    color: rgba(242,239,232,0.55);
+    font-size:14px;
+    max-width:30ch;
+  }
+
+  /* ================= IMPACT ================= */
+  .impact{
+    background: var(--black);
+    padding: 110px 0;
+    text-align:left;
+  }
+  .impact .quote{
+    color: var(--off-white);
+    font-size: clamp(30px, 9vw, 42px);
+    font-weight:600;
+    max-width:14ch;
+    margin-bottom:22px;
+  }
+  .btn-outline{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    border:1px solid rgba(242,239,232,0.35);
+    color: var(--off-white);
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:0.1em;
+    padding:16px 24px;
+    width:100%;
+    transition: border-color .3s var(--ease), background .3s var(--ease);
+  }
+  .btn-outline:active{background: rgba(242,239,232,0.08);}
+
+  /* ================= PROVA SOCIAL ================= */
+  .social{background: var(--off-white);}
+  .testi-slot{
+    margin-top:48px;
+    border-top:1px solid var(--line-dark);
+    padding-top:32px;
+  }
+  .testi-slot + .testi-slot{margin-top:0;}
+  .testi-row{
+    padding-bottom:32px;
+    border-bottom:1px solid var(--line-dark);
+    margin-bottom:32px;
+  }
+  .testi-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .testi-mark{
+    font-family:'Sora', sans-serif;
+    font-size:30px;
+    color:#c9c5b8;
+    line-height:1;
+    margin-bottom:14px;
+  }
+  .testi-row p.placeholder-txt{
+    color:#8b897f;
+    font-size:14px;
+    font-style:italic;
+    max-width:32ch;
+    margin-bottom:14px;
+  }
+  .testi-row .who{
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    color:#333230;
+  }
+
+  /* ================= INSTAGRAM ================= */
+  .insta{background:#111110;}
+  .insta .kicker .label{color: var(--metal);}
+  .insta .kicker .rule{background: var(--metal);}
+  .insta h2{color: var(--off-white);}
+  .insta .handle{
+    color: var(--off-white);
+    font-family:'Sora', sans-serif;
+    font-size:15px;
+    font-weight:600;
+    margin-top:18px;
+    display:inline-block;
+  }
+  .insta-grid{
+    margin-top:36px;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:3px;
+  }
+  .insta-grid .cell{aspect-ratio:1/1; overflow:hidden; background:#151310;}
+  .insta-grid .cell img{width:100%;height:100%;object-fit:cover;filter:contrast(1.05);}
+
+  /* ================= CTA FINAL ================= */
+  .cta-final{
+    background: linear-gradient(180deg,#0c0c0b, #1a1a17);
+    padding: 110px 0 90px;
+  }
+  .cta-final h2{
+    color: var(--off-white);
+    font-size: clamp(28px, 8vw, 38px);
+    max-width:15ch;
+    margin-bottom:20px;
+  }
+  .cta-final p{
+    color: rgba(242,239,232,0.62);
+    font-size:15px;
+    max-width:32ch;
+    margin-bottom:34px;
+  }
+
+  /* ================= FOOTER ================= */
+  footer{
+    background: var(--black);
+    padding: 56px 0 34px;
+    border-top:1px solid var(--line);
+  }
+  .foot-logo{
+    color: var(--off-white);
+    font-family:'Sora', sans-serif;
+    font-weight:700;
+    font-size:19px;
+  }
+  .foot-logo span{
+    display:block;
+    font-family:'Inter', sans-serif;
+    font-weight:500;
+    font-size:9.5px;
+    letter-spacing:0.16em;
+    color: var(--metal);
+    margin-top:6px;
+  }
+  .foot-links{
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .foot-links a{
+    padding:14px 0;
+    border-top:1px solid var(--line);
+    color: rgba(242,239,232,0.75);
+    font-size:14px;
+  }
+  .foot-links a:last-child{border-bottom:1px solid var(--line);}
+  .foot-meta{
+    margin-top:34px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    color: var(--metal);
+    font-size:12px;
+    letter-spacing:0.04em;
+  }
+  .foot-bottom{
+    margin-top:44px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    color: var(--metal-dim);
+    font-size:11px;
+    letter-spacing:0.04em;
+  }
+
+  /* ================= WHATSAPP FLOAT ================= */
+  .wa-float{
+    position:fixed;
+    right:16px;
+    bottom:16px;
+    z-index:150;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background: var(--off-white);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    transition: transform .3s var(--ease);
+  }
+  .wa-float:active{transform:scale(0.94);}
+  .wa-float svg{width:24px;height:24px;}
+
+  /* ================= TABLET / DESKTOP ================= */
+  @media (min-width:600px){
+    .wrap{padding:0 48px;}
+    header{padding:22px 48px;}
+    .hero-content{padding:0 48px 60px;}
+    .gallery{padding:0 48px 20px;margin-left:-48px;margin-right:-48px;}
+    .gcard{flex-basis:52%;}
+  }
+
+  @media (min-width:900px){
+    .wrap{max-width:1180px;margin:0 auto;padding:0 56px;}
+    header{padding:26px 56px;}
+    .hero-content{max-width:1180px;margin:0 auto;padding:0 56px 84px;width:100%;}
+    .hero h1{font-size:64px;}
+    .hero p.sub{font-size:17px;max-width:36ch;}
+    .btn-primary,.btn-outline{width:auto;}
+    .sec-pad{padding:150px 0;}
+    .impact,.cta-final{padding-top:150px;padding-bottom:150px;}
+
+    .marca-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+    .marca-photo{margin-top:0;aspect-ratio:4/5;order:2;}
+    .marca-text{order:1;}
+
+    .gallery{padding:0 56px 24px;margin-left:calc(-1 * (100vw - 1180px)/2 - 56px);margin-right:calc(-1 * (100vw - 1180px)/2 - 56px);}
+    .gcard{flex-basis:30%;}
+
+    .dlist{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;margin-top:64px;}
+    .ditem{padding:36px 0;}
+
+    .ptimeline{max-width:640px;}
+
+    .insta-content{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start;}
+    .insta-grid{margin-top:0;}
+
+    footer .foot-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;align-items:start;}
+    .foot-links{margin-top:0;}
+  }
+
+  @media (min-width:1200px){
+    .hero h1{font-size:76px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header id="siteHeader">
+  <a href="#top" class="logo">P.A.P<span>PLANEJADOS DE ALTA PERFORMANCE</span></a>
+  <button class="menu-btn" id="menuOpen" aria-label="Abrir menu">
+    MENU
+    <span class="bars"><i></i><i></i></span>
+  </button>
+</header>
+
+<!-- ================= NAV DRAWER ================= -->
+<div class="nav-drawer" id="navDrawer">
+  <button class="close-btn" id="menuClose" aria-label="Fechar menu">FECHAR ✕</button>
+  <ul>
+    <li><a href="#top" class="nav-link">Início</a></li>
+    <li><a href="#projetos" class="nav-link">Projetos</a></li>
+    <li><a href="#marca" class="nav-link">Sobre</a></li>
+    <li><a href="#processo" class="nav-link">Processo</a></li>
+    <li><a href="#contato" class="nav-link">Orçamento</a></li>
+  </ul>
+  <div class="drawer-foot">BAIXADA SANTISTA — SP<br>@planejadospap</div>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-photo">
+    <img src="https://images.pexels.com/photos/18285887/pexels-photo-18285887.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Cozinha planejada de alto padrão com marcenaria escura" loading="eager">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">PLANEJADOS DE ALTA PERFORMANCE</div>
+    <h1>Seu espaço.<br>Projetado para você.</h1>
+    <p class="sub">Móveis planejados sob medida, com precisão em cada detalhe.</p>
+    <a href="https://wa.me/5513991765368?text=Ol%C3%A1!%20Vi%20o%20site%20da%20P.A.P%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20m%C3%B3veis%20planejados." class="btn-primary" target="_blank" rel="noopener">SOLICITAR ORÇAMENTO</a>
+    <div class="hero-foot">BAIXADA SANTISTA <span class="dot"></span> SP</div>
+  </div>
+</section>
+
+<!-- ================= MARCA ================= -->
+<section class="marca sec-pad" id="marca">
+  <div class="wrap">
+    <div class="marca-grid">
+      <div class="marca-text reveal">
+        <div class="kicker"><span class="rule"></span><span class="label">A MARCA</span></div>
+        <h2 class="sec-title">Mais do que móveis. Projetos pensados para durar.</h2>
+        <p class="sec-body">Na P.A.P, cada projeto nasce da combinação entre planejamento, funcionalidade e acabamento. Desenvolvemos móveis planejados sob medida para transformar espaços em ambientes que fazem sentido para quem vive neles.</p>
+      </div>
+      <div class="marca-photo reveal">
+        <img src="https://images.pexels.com/photos/5705/wood-vintage-wooden-furniture.jpg?auto=compress&cs=tinysrgb&h=627&fit=crop&w=1200" alt="Detalhe de acabamento em marcenaria de alto padrão" loading="lazy">
+        <span class="cap">ACABAMENTO — DETALHE DE MARCENARIA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJETOS ================= -->
+<section class="projetos sec-pad" id="projetos">
+  <div class="wrap">
+    <div class="kicker"><span class="rule"></span><span class="label">PROJETOS</span></div>
+    <h2 class="sec-title reveal">Projetos que falam por si.</h2>
+  </div>
+  <div class="gallery reveal">
+    <div class="gcard">
+      <div class="frame"><img src="https://images.pexels.com/photos/18285876/pexels-photo-18285876.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Cozinha planejada moderna com coifa preta" loading="lazy"></div>
+      <div class="meta"><span class="title">COZINHA</span><span class="place">SANTOS — SP</span></div>
+    </div>
+    <div class="gcard">
+      <div class="frame"><img src="https://images.pexels.com/photos/34549301/pexels-photo-34549301.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Painel planejado com marcenaria em sala de estar" loading="lazy"></div>
+      <div class="meta"><span class="title">PAINEL</span><span class="place">PRAIA GRANDE — SP</span></div>
+    </div>
+    <div class="gcard">
+      <div class="frame"><img src="https://images.pexels.com/photos/6585745/pexels-photo-6585745.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Closet planejado com acabamento em madeira" loading="lazy"></div>
+      <div class="meta"><span class="title">CLOSET</span><span class="place">BAIXADA SANTISTA — SP</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIFERENCIAIS ================= -->
+<section class="diferenciais sec-pad">
+  <div class="wrap">
+    <div class="kicker"><span class="rule"></span><span class="label">DIFERENCIAIS</span></div>
+    <h2 class="sec-title reveal">Precisão em cada etapa.</h2>
+    <div class="dlist">
+      <div class="ditem reveal">
+        <span class="num">01</span>
+        <div><h3>Sob medida</h3><p>Projetos desenvolvidos para aproveitar cada espaço.</p></div>
+      </div>
+      <div class="ditem reveal">
+        <span class="num">02</span>
+        <div><h3>Alto padrão</h3><p>Materiais e acabamentos selecionados para entregar qualidade.</p></div>
+      </div>
+      <div class="ditem reveal">
+        <span class="num">03</span>
+        <div><h3>Projeto personalizado</h3><p>Cada ambiente é pensado de acordo com seu estilo e necessidade.</p></div>
+      </div>
+      <div class="ditem reveal">
+        <span class="num">04</span>
+        <div><h3>Atenção aos detalhes</h3><p>Do primeiro desenho ao acabamento final.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESSO ================= -->
+<section class="processo sec-pad" id="processo">
+  <div class="wrap">
+    <div class="kicker"><span class="rule"></span><span class="label">PROCESSO</span></div>
+    <h2 class="sec-title reveal">Do primeiro contato à instalação.</h2>
+    <div class="ptimeline">
+      <div class="pstep reveal"><span class="num">01</span><h3>Conversa</h3><p>Entendemos suas necessidades e seu espaço.</p></div>
+      <div class="pstep reveal"><span class="num">02</span><h3>Projeto</h3><p>Desenvolvemos uma solução personalizada.</p></div>
+      <div class="pstep reveal"><span class="num">03</span><h3>Aprovação</h3><p>Você visualiza e aprova todos os detalhes.</p></div>
+      <div class="pstep reveal"><span class="num">04</span><h3>Produção</h3><p>Seu projeto entra em produção.</p></div>
+      <div class="pstep reveal"><span class="num">05</span><h3>Instalação</h3><p>Finalizamos o ambiente com precisão.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IMPACT ================= -->
+<section class="impact">
+  <div class="wrap">
+    <p class="quote reveal">Seu espaço merece um projeto à altura.</p>
+    <a href="https://wa.me/5513991765368?text=Ol%C3%A1!%20Vi%20o%20site%20da%20P.A.P%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20m%C3%B3veis%20planejados." class="btn-outline reveal" target="_blank" rel="noopener">FALAR COM A P.A.P</a>
+  </div>
+</section>
+
+<!-- ================= PROVA SOCIAL ================= -->
+<section class="social sec-pad">
+  <div class="wrap">
+    <div class="kicker"><span class="rule"></span><span class="label">DEPOIMENTOS</span></div>
+    <h2 class="sec-title reveal">Quem conhece, recomenda.</h2>
+    <div class="testi-slot reveal">
+      <div class="testi-row">
+        <div class="testi-mark">"</div>
+        <p class="placeholder-txt">Espaço reservado para o depoimento de um cliente real da P.A.P.</p>
+        <div class="who">NOME DO CLIENTE — PROJETO REALIZADO</div>
+      </div>
+      <div class="testi-row">
+        <div class="testi-mark">"</div>
+        <p class="placeholder-txt">Espaço reservado para o depoimento de um cliente real da P.A.P.</p>
+        <div class="who">NOME DO CLIENTE — PROJETO REALIZADO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTAGRAM ================= -->
+<section class="insta sec-pad">
+  <div class="wrap">
+    <div class="insta-content">
+      <div class="reveal">
+        <div class="kicker"><span class="rule"></span><span class="label">INSTAGRAM</span></div>
+        <h2 class="sec-title">Acompanhe nossos projetos.</h2>
+        <a href="https://instagram.com/planejadospap" target="_blank" rel="noopener" class="handle">@planejadospap →</a>
+      </div>
+      <div class="insta-grid reveal">
+        <div class="cell"><img src="https://images.pexels.com/photos/18285887/pexels-photo-18285887.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Projeto P.A.P" loading="lazy"></div>
+        <div class="cell"><img src="https://images.pexels.com/photos/6585745/pexels-photo-6585745.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Projeto P.A.P" loading="lazy"></div>
+        <div class="cell"><img src="https://images.pexels.com/photos/34549301/pexels-photo-34549301.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Projeto P.A.P" loading="lazy"></div>
+        <div class="cell"><img src="https://images.pexels.com/photos/18285876/pexels-photo-18285876.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Projeto P.A.P" loading="lazy"></div>
+        <div class="cell"><img src="https://images.pexels.com/photos/5705/wood-vintage-wooden-furniture.jpg?auto=compress&cs=tinysrgb&h=500&fit=crop&w=500" alt="Projeto P.A.P" loading="lazy"></div>
+        <div class="cell"><img src="https://images.pexels.com/photos/8082300/pexels-photo-8082300.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Projeto P.A.P" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA FINAL ================= -->
+<section class="cta-final" id="contato">
+  <div class="wrap">
+    <h2 class="reveal">Vamos projetar seu próximo ambiente?</h2>
+    <a href="https://wa.me/5513991765368?text=Ol%C3%A1!%20Vi%20o%20site%20da%20P.A.P%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20m%C3%B3veis%20planejados." class="btn-primary reveal" style="max-width:340px;" target="_blank" rel="noopener">SOLICITAR ORÇAMENTO PELO WHATSAPP</a>
+    <p style="margin-top:22px;color:var(--metal);font-size:12px;letter-spacing:0.08em;">BAIXADA SANTISTA — SP</p>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="foot-logo">P.A.P<span>PLANEJADOS DE ALTA PERFORMANCE</span></a>
+      </div>
+      <nav class="foot-links">
+        <a href="#top">Início</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#marca">Sobre</a>
+        <a href="#processo">Processo</a>
+        <a href="#contato">Orçamento</a>
+      </nav>
+      <div class="foot-meta">
+        <span>@planejadospap</span>
+        <span>WhatsApp: (13) 99176-5368</span>
+        <span>Baixada Santista — SP</span>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 P.A.P — Planejados de Alta Performance. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<!-- ================= WHATSAPP FLOAT ================= -->
+<a href="https://wa.me/5513991765368?text=Ol%C3%A1!%20Vi%20o%20site%20da%20P.A.P%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20m%C3%B3veis%20planejados." class="wa-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#0a0a0a"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.8a8.1 8.1 0 0 1 5.75 2.38 8.07 8.07 0 0 1 2.38 5.73c0 4.48-3.65 8.12-8.13 8.12a8.1 8.1 0 0 1-4.14-1.13l-.3-.17-3.12.82.83-3.04-.19-.31a8.08 8.08 0 0 1-1.25-4.33c0-4.48 3.65-8.12 8.13-8.12M8.53 6.7c-.16 0-.42.06-.64.31-.22.24-.85.83-.85 2.03s.87 2.35.99 2.51c.12.16 1.7 2.72 4.2 3.7 2.07.82 2.49.66 2.94.62.45-.04 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.71-1.67-.8-.22-.08-.39-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.29.18-.53.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.44-1.35-1.68-.14-.24-.02-.37.11-.49.11-.11.24-.29.36-.43.12-.14.16-.24.24-.4.08-.16.04-.31-.02-.43-.06-.12-.55-1.35-.76-1.84-.2-.48-.4-.42-.55-.42h-.47Z"/></svg>
+</a>
+
+<script>
+  // Header solid on scroll
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => {
+    if (window.scrollY > 40) header.classList.add('solid');
+    else header.classList.remove('solid');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Nav drawer
+  const drawer = document.getElementById('navDrawer');
+  document.getElementById('menuOpen').addEventListener('click', () => drawer.classList.add('open'));
+  document.getElementById('menuClose').addEventListener('click', () => drawer.classList.remove('open'));
+  document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => drawer.classList.remove('open')));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
