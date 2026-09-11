@@ -1,8 +1,10 @@
 {
-  "name": "P.A.P — Planejados de Alta Performance",
+  "id": "/",
+  "name": "P.A.P - Planejados de Alta Performance",
   "short_name": "P.A.P",
-  "description": "Móveis planejados sob medida na Baixada Santista — SP.",
+  "description": "Móveis planejados sob medida na Baixada Santista, SP.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#0a0a0a",
