@@ -421,7 +421,8 @@ header.solid::before{opacity:0;}
 .projetos{background:var(--surface);overflow:clip;}
 .gallery-header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;}
 .gallery-header .sec-body{margin-bottom:0;}
-.gallery-controls{display:flex;gap:8px;}
+/* No toque o arraste já resolve; as setas só aparecem com mouse/desktop. */
+.gallery-controls{display:none;gap:8px;}
 .ctrl-btn{
   width:48px;
   height:48px;
@@ -812,6 +813,7 @@ footer{
   .marca-grid{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
   .marca-photo{margin-top:0;}
 
+  .gallery-controls{display:flex;}
   .gallery{
     --edge:max(var(--gutter),calc((100vw - var(--wrap)) / 2 + var(--gutter)));
     gap:24px;
