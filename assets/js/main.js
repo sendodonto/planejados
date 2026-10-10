@@ -130,6 +130,7 @@ if (gallery) {
 // Visualizador 3D: baixa a biblioteca e o modelo apenas após a ação do visitante.
 const cozinha3d = document.getElementById('cozinha3d');
 const abrirCozinha3d = document.getElementById('abrirCozinha3d');
+const abrirCozinha3dTexto = document.getElementById('abrirCozinha3dTexto');
 const statusCozinha3d = document.getElementById('statusCozinha3d');
 let modelViewerPromise;
 
@@ -149,10 +150,10 @@ const loadModelViewer = () => {
   return modelViewerPromise;
 };
 
-if (cozinha3d && abrirCozinha3d && statusCozinha3d) {
+if (cozinha3d && abrirCozinha3d && abrirCozinha3dTexto && statusCozinha3d) {
   abrirCozinha3d.addEventListener('click', async () => {
     abrirCozinha3d.disabled = true;
-    abrirCozinha3d.textContent = 'CARREGANDO MODELO...';
+    abrirCozinha3dTexto.textContent = 'Carregando 3D...';
     statusCozinha3d.textContent = 'Preparando a visualização 3D.';
 
     try {
@@ -160,18 +161,19 @@ if (cozinha3d && abrirCozinha3d && statusCozinha3d) {
       cozinha3d.dismissPoster();
     } catch (error) {
       abrirCozinha3d.disabled = false;
-      abrirCozinha3d.textContent = 'TENTAR NOVAMENTE';
+      abrirCozinha3dTexto.textContent = 'Tentar novamente';
       statusCozinha3d.textContent = 'Não foi possível abrir o 3D. Verifique sua conexão e tente novamente.';
     }
   });
 
   cozinha3d.addEventListener('load', () => {
+    abrirCozinha3dTexto.textContent = '3D aberto';
     statusCozinha3d.textContent = 'Modelo carregado. Arraste para explorar todos os ângulos.';
   });
 
   cozinha3d.addEventListener('error', () => {
     abrirCozinha3d.disabled = false;
-    abrirCozinha3d.textContent = 'TENTAR NOVAMENTE';
+    abrirCozinha3dTexto.textContent = 'Tentar novamente';
     statusCozinha3d.textContent = 'O modelo não carregou. Tente novamente em instantes.';
   });
 }

@@ -145,7 +145,7 @@ body { background: var(--pap-paper); color: var(--pap-ink); }
 .projeto-3d-poster {
   background:
     linear-gradient(0deg, rgba(18, 15, 13, .24), transparent 48%),
-    url('/assets/3d/cozinha-planejada-capa-3d.webp') center / cover no-repeat !important;
+    url('/assets/3d/cozinha-planejada-recorte-3d.webp') center / 92% auto no-repeat !important;
 }
 .portfolio-grid .pitem,
 .vframe,
@@ -210,4 +210,150 @@ footer { background: #171310; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
+}
+
+/* Experiência 3D: cartão único, inspirado na referência enviada. */
+.projeto-3d-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+  align-items: stretch;
+  min-height: 600px;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #d7c7b5;
+}
+.projeto-3d-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(48px, 5vw, 72px);
+}
+.projeto-3d-copy .sec-title {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(2.8rem, 4.2vw, 3.8rem);
+  line-height: .98;
+  letter-spacing: -.055em;
+}
+.projeto-3d-copy .sec-body {
+  max-width: 34ch;
+  margin-top: 30px;
+  font-size: clamp(1rem, 1.25vw, 1.2rem);
+  line-height: 1.65;
+  color: rgba(34, 27, 23, .76);
+}
+.projeto-3d-copy .projeto-3d-abrir {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 64px;
+  margin-top: 32px;
+  padding: 0 30px;
+  border: 0;
+  border-radius: 999px;
+  transform: none;
+  background: #29211c;
+  color: #fffaf3;
+  font: 700 15px/1 var(--font-body, sans-serif);
+  letter-spacing: .01em;
+  text-transform: none;
+  cursor: pointer;
+  transition: transform 160ms ease-out, background-color 180ms ease-out, opacity 180ms ease-out;
+}
+.projeto-3d-copy .projeto-3d-abrir .icon { width: 20px; height: 20px; }
+.projeto-3d-copy .projeto-3d-abrir:active { transform: scale(.97); }
+.projeto-3d-copy .projeto-3d-abrir:disabled { cursor: wait; opacity: .72; }
+.projeto-3d-stage {
+  position: relative;
+  min-width: 0;
+  background: transparent;
+}
+.projeto-3d-stage model-viewer {
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.projeto-3d-poster {
+  background: url('/assets/3d/cozinha-planejada-recorte-3d.webp') center / 100% auto no-repeat !important;
+}
+.projeto-3d-selo {
+  position: absolute;
+  right: 28px;
+  bottom: 26px;
+  z-index: 3;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: rgba(247, 239, 229, .9);
+  color: #302720;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+}
+.projeto-3d-rodape {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .projeto-3d-copy .projeto-3d-abrir:hover { background: #4d3d32; }
+}
+
+@media (max-width: 760px) {
+  .projeto-3d .wrap { padding-inline: 0; }
+  .projeto-3d-grid {
+    display: block;
+    min-height: 0;
+    border-radius: 30px;
+  }
+  .projeto-3d-copy {
+    padding: 46px 22px 10px;
+  }
+  .projeto-3d-copy .sec-title {
+    max-width: none;
+    font-size: clamp(2.1rem, 8.6vw, 2.75rem);
+    line-height: 1.02;
+  }
+  .projeto-3d-copy .sec-body {
+    max-width: 32ch;
+    margin-top: 26px;
+    font-size: 1.02rem;
+    line-height: 1.58;
+  }
+  .projeto-3d-copy .projeto-3d-abrir {
+    min-height: 62px;
+    margin-top: 30px;
+    padding-inline: 28px;
+    font-size: 15px;
+  }
+  .projeto-3d-stage model-viewer {
+    min-height: 0;
+    height: clamp(310px, 86vw, 410px);
+  }
+  .projeto-3d-poster { background-size: 92% auto !important; }
+  .projeto-3d-selo {
+    right: 22px;
+    bottom: 22px;
+  }
+}
+
+@media (max-width: 390px) {
+  .projeto-3d-copy { padding: 42px 22px 8px; }
+  .projeto-3d-copy .sec-title { font-size: 2.1rem; }
+  .projeto-3d-copy .sec-body { font-size: 1rem; }
+  .projeto-3d-copy .projeto-3d-abrir { width: 100%; padding-inline: 20px; }
+  .projeto-3d-stage model-viewer { height: 320px; }
 }

@@ -47,7 +47,7 @@
 <link rel="preload" href="/assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/sora-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="/assets/css/talhe-inspired.css">
+<link rel="stylesheet" href="/assets/css/talhe-inspired.css?v=20261010-3d-card-2">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -61,6 +61,7 @@
   <symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
   <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></symbol>
   <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 9 8-4.5M12 12 4 7.5M12 12v9"/></symbol>
 </svg>
 <!-- ================= HEADER ================= -->
 <header id="siteHeader">
@@ -261,17 +262,19 @@
   <div class="wrap">
     <div class="projeto-3d-grid">
       <div class="projeto-3d-copy reveal">
-        <p class="projeto-3d-label">VISUALIZAÇÃO INTERATIVA</p>
-        <h2 class="sec-title">Explore o projeto antes da instalação.</h2>
-        <p class="sec-body">Explore uma cozinha planejada em 3D e observe a distribuição dos armários, a ilha central e cada escolha de acabamento.</p>
-        <p class="projeto-3d-nota">No computador, arraste com o mouse. No celular, mova com um dedo e use dois dedos para aproximar.</p>
+        <h2 class="sec-title">Veja seu ambiente antes de ele existir</h2>
+        <p class="sec-body">Explore esta cozinha em 3D: gire, aproxime e observe cada detalhe. É assim que você aprova o seu projeto, vendo, não imaginando.</p>
+        <button class="projeto-3d-abrir" id="abrirCozinha3d" type="button">
+          <span id="abrirCozinha3dTexto">Explorar em 3D</span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-cube"/></svg>
+        </button>
       </div>
 
       <div class="projeto-3d-stage reveal">
         <model-viewer
           id="cozinha3d"
           src="/assets/3d/cozinha-planejada.glb"
-          poster="/assets/3d/cozinha-planejada-capa-3d.webp"
+          poster="/assets/3d/cozinha-planejada-recorte-3d.webp"
           alt="Modelo 3D interativo de uma cozinha planejada grafite com detalhes em madeira e ilha central ripada"
           loading="lazy"
           reveal="manual"
@@ -288,12 +291,9 @@
           shadow-softness="0.55"
           exposure="1.12"
         >
-          <div class="projeto-3d-poster" slot="poster">
-            <button class="projeto-3d-abrir" id="abrirCozinha3d" type="button">
-              EXPLORAR COZINHA EM 3D
-            </button>
-          </div>
+          <div class="projeto-3d-poster" slot="poster"></div>
         </model-viewer>
+        <span class="projeto-3d-selo" aria-hidden="true">ESTUDO 3D</span>
         <div class="projeto-3d-rodape">
           <span id="statusCozinha3d" aria-live="polite">O modelo só será carregado quando você abrir.</span>
           <span class="projeto-3d-gesto" aria-hidden="true">ARRASTE PARA GIRAR</span>
@@ -883,7 +883,7 @@
 </a>
 
 <!-- ================= SCRIPTS ================= -->
-<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/main.js?v=20261010-3d-card" defer></script>
 
 </body>
 </html>
