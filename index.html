@@ -47,6 +47,7 @@
 <link rel="preload" href="/assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/sora-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/talhe-inspired.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -66,15 +67,13 @@
   <a href="#top" class="logo" aria-label="P.A.P Planejados de Alta Performance, início"><img src="/assets/brand/logo.png" width="726" height="607" decoding="async" alt="P.A.P Planejados de Alta Performance"></a>
 
   <nav class="header-nav" aria-label="Navegação principal">
-    <a href="#projetos">Projetos</a>
-    <a href="#portfolio">Portfólio</a>
-    <a href="#segmentos">Segmentos</a>
-    <a href="#marca">Sobre</a>
-    <a href="#processo">Processo</a>
-    <a href="#contato">Contato</a>
+    <a href="#marca">Ambientes</a>
+    <a href="#projeto-3d">Em 3D</a>
+    <a href="#processo">Como trabalhamos</a>
+    <a href="#portfolio">Projetos</a>
   </nav>
 
-  <a href="https://wa.me/5513991765368?text=Ol%C3%A1!%20Vi%20o%20site%20da%20P.A.P%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20m%C3%B3veis%20planejados." class="header-cta" target="_blank" rel="noopener">Solicitar orçamento</a>
+  <a href="/orcamento/" class="header-cta">Pedir orçamento</a>
 
   <button class="menu-btn" id="menuOpen" type="button" aria-label="Abrir menu" aria-controls="navDrawer" aria-expanded="false">
     MENU
@@ -86,12 +85,11 @@
 <div class="nav-drawer" id="navDrawer" aria-hidden="true">
   <button class="close-btn" id="menuClose" type="button" aria-label="Fechar menu">Fechar <svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg></button>
   <ul>
-    <li><a href="#projetos" class="nav-link">Projetos em Destaque</a></li>
-    <li><a href="#portfolio" class="nav-link">Portfólio Completo</a></li>
-    <li><a href="#segmentos" class="nav-link">Segmentos</a></li>
-    <li><a href="#marca" class="nav-link">Sobre a P.A.P</a></li>
-    <li><a href="#processo" class="nav-link">Nosso Processo</a></li>
-    <li><a href="#contato" class="nav-link">Solicitar Orçamento</a></li>
+    <li><a href="#marca" class="nav-link">Ambientes</a></li>
+    <li><a href="#projeto-3d" class="nav-link">Projeto em 3D</a></li>
+    <li><a href="#processo" class="nav-link">Como trabalhamos</a></li>
+    <li><a href="#portfolio" class="nav-link">Projetos realizados</a></li>
+    <li><a href="/orcamento/" class="nav-link">Pedir orçamento</a></li>
   </ul>
   <div class="drawer-foot">
     <strong>BAIXADA SANTISTA - SP</strong><br>
@@ -104,20 +102,18 @@
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
   <div class="hero-shell">
+    <img class="hero-photo" src="/assets/portfolio/hero-cozinha-escada-caracol.webp" width="1241" height="1249" alt="Cozinha planejada compacta com marcenaria em ripado de madeira e escada em caracol" fetchpriority="high">
+    <div class="hero-shade" aria-hidden="true"></div>
     <div class="hero-content">
       <p class="hero-kicker">MARCENARIA SOB MEDIDA NA BAIXADA SANTISTA</p>
-      <h1><span class="line"><span style="--l:0">Móveis que</span></span><span class="line"><span style="--l:1">definem o seu</span></span><span class="line"><span style="--l:2">espaço.</span></span></h1>
-      <p class="sub">Projeto, fabricação e instalação em uma experiência completa, pensada para a sua rotina.</p>
+      <h1><span class="sr-only">P.A.P, móveis planejados sob medida</span><span class="hero-mark" aria-hidden="true">P.A.P</span></h1>
+      <p class="sub">Cada milímetro pensado para a sua rotina.</p>
       <div class="hero-actions">
-        <a href="https://wa.me/5513991765368?text=Ol%C3%A1!%20Vi%20o%20site%20da%20P.A.P%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20m%C3%B3veis%20planejados." class="btn-primary" target="_blank" rel="noopener">Solicitar orçamento</a>
-        <a href="#portfolio" class="btn-secondary">Ver projetos</a>
+        <a href="/orcamento/" class="btn-primary">Pedir orçamento</a>
+        <a href="#portfolio" class="btn-secondary">Conhecer projetos</a>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="/assets/portfolio/hero-cozinha-escada-caracol.webp" width="1241" height="1249" alt="Cozinha planejada compacta com marcenaria em ripado de madeira e escada em caracol" fetchpriority="high">
-      <span class="hero-mark" aria-hidden="true">P.A.P</span>
-      <p class="hero-photo-caption">PROJETO RESIDENCIAL · BAIXADA SANTISTA</p>
-    </div>
+    <p class="hero-photo-caption">PROJETO RESIDENCIAL · BAIXADA SANTISTA</p>
   </div>
   <div class="hero-services wrap" aria-label="Diferenciais da P.A.P">
     <div><strong>Projeto personalizado</strong><span>Criado para sua rotina</span></div>
@@ -842,7 +838,7 @@
   <div class="wrap">
     <h2 class="reveal">Vamos projetar seu próximo ambiente?</h2>
     <p class="reveal">Solicite uma avaliação sem compromisso. Nossa equipe vai até você para entender o espaço e propor a melhor solução sob medida.</p>
-    <a href="https://wa.me/5513991765368?text=Ol%C3%A1!%20Vi%20o%20site%20da%20P.A.P%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20m%C3%B3veis%20planejados." class="btn-primary reveal" target="_blank" rel="noopener">Solicitar orçamento</a>
+    <a href="/orcamento/" class="btn-primary reveal">Pedir orçamento</a>
     <p class="cta-region">Atendemos Santos, Praia Grande, São Vicente e toda a Baixada Santista.</p>
   </div>
 </section>
@@ -865,7 +861,7 @@
         <a href="#segmentos">Segmentos</a>
         <a href="#marca">Sobre a P.A.P</a>
         <a href="#processo">Processo</a>
-        <a href="#contato">Solicitar Orçamento</a>
+        <a href="/orcamento/">Pedir orçamento</a>
       </nav>
       <div class="foot-meta">
         <strong>CONTATOS & ATENDIMENTO</strong>
