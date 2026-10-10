@@ -131,6 +131,9 @@ if (gallery) {
 const cozinha3d = document.getElementById('cozinha3d');
 const abrirCozinha3d = document.getElementById('abrirCozinha3d');
 const statusCozinha3d = document.getElementById('statusCozinha3d');
+const fecharCozinha3d = document.getElementById('fecharCozinha3d');
+const resetCozinha3d = document.getElementById('resetCozinha3d');
+const stageCozinha3d = cozinha3d?.closest('.projeto-3d-stage');
 let modelViewerPromise;
 
 const loadModelViewer = () => {
@@ -154,6 +157,10 @@ if (cozinha3d && abrirCozinha3d && statusCozinha3d) {
     abrirCozinha3d.disabled = true;
     abrirCozinha3d.textContent = 'CARREGANDO MODELO...';
     statusCozinha3d.textContent = 'Preparando a visualização 3D.';
+    if (window.matchMedia('(max-width: 959px)').matches) {
+      stageCozinha3d?.classList.add('is-immersive');
+      root.classList.add('is-locked');
+    }
 
     try {
       await loadModelViewer();
@@ -167,12 +174,26 @@ if (cozinha3d && abrirCozinha3d && statusCozinha3d) {
 
   cozinha3d.addEventListener('load', () => {
     statusCozinha3d.textContent = 'Modelo carregado. Arraste para explorar todos os ângulos.';
+    fecharCozinha3d?.focus({ preventScroll: true });
   });
 
   cozinha3d.addEventListener('error', () => {
     abrirCozinha3d.disabled = false;
     abrirCozinha3d.textContent = 'TENTAR NOVAMENTE';
-    statusCozinha3d.textContent = 'O modelo não carregou. Tente novamente em instantes.';
+      statusCozinha3d.textContent = 'O modelo não carregou. Tente novamente em instantes.';
+  });
+
+  fecharCozinha3d?.addEventListener('click', () => {
+    stageCozinha3d?.classList.remove('is-immersive');
+    root.classList.remove('is-locked');
+    abrirCozinha3d.disabled = false;
+    abrirCozinha3d.textContent = 'EXPLORAR NOVAMENTE';
+    abrirCozinha3d.focus({ preventScroll: true });
+  });
+
+  resetCozinha3d?.addEventListener('click', () => {
+    cozinha3d.cameraOrbit = '42deg 80deg 88%';
+    cozinha3d.fieldOfView = '30deg';
   });
 }
 
@@ -306,7 +327,8 @@ modal.addEventListener('keydown', e => {
 
 window.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
-  if (modal.classList.contains('open')) closeModal();
+  if (stageCozinha3d?.classList.contains('is-immersive')) fecharCozinha3d?.click();
+  else if (modal.classList.contains('open')) closeModal();
   else if (drawer.classList.contains('open')) closeDrawer({ restoreFocus: true });
 });
 
