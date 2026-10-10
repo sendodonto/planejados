@@ -46,8 +46,8 @@
 </script>
 <link rel="preload" href="/assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/sora-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/styles.css?v=20261010b">
-<link rel="stylesheet" href="/assets/css/talhe-inspired.css?v=20261010b">
+<link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="/assets/css/talhe-inspired.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -152,10 +152,6 @@
       <figure class="marca-category">
         <div class="marca-photo"><img src="assets/portfolio/653515737_18122916076597614_6469876313689469564_n.webp" alt="Espaço gourmet com adega e frigobar" loading="lazy"></div>
         <figcaption><strong>Gourmet</strong><span>Feito para receber</span></figcaption>
-      </figure>
-      <figure class="marca-category">
-        <div class="marca-photo"><img src="assets/portfolio/banheiro_verde_sage.jpg" alt="Banheiro planejado com gabinete verde sage" loading="lazy"></div>
-        <figcaption><strong>Banheiros e lavabos</strong><span>Organização em cada medida</span></figcaption>
       </figure>
     </div>
 
@@ -269,16 +265,9 @@
         <h2 class="sec-title">Explore o projeto antes da instalação.</h2>
         <p class="sec-body">Explore uma cozinha planejada em 3D e observe a distribuição dos armários, a ilha central e cada escolha de acabamento.</p>
         <p class="projeto-3d-nota">No computador, arraste com o mouse. No celular, mova com um dedo e use dois dedos para aproximar.</p>
-        <button class="projeto-3d-abrir" id="abrirCozinha3d" type="button">
-          EXPLORAR EM 3D
-        </button>
       </div>
 
       <div class="projeto-3d-stage reveal">
-        <div class="projeto-3d-toolbar" aria-label="Controles da visualização 3D">
-          <button type="button" id="resetCozinha3d">Vista inicial</button>
-          <button type="button" id="fecharCozinha3d">Fechar 3D</button>
-        </div>
         <model-viewer
           id="cozinha3d"
           src="/assets/3d/cozinha-planejada.glb"
@@ -299,7 +288,11 @@
           shadow-softness="0.55"
           exposure="1.12"
         >
-          <div class="projeto-3d-poster" slot="poster"></div>
+          <div class="projeto-3d-poster" slot="poster">
+            <button class="projeto-3d-abrir" id="abrirCozinha3d" type="button">
+              EXPLORAR COZINHA EM 3D
+            </button>
+          </div>
         </model-viewer>
         <div class="projeto-3d-rodape">
           <span id="statusCozinha3d" aria-live="polite">O modelo só será carregado quando você abrir.</span>
@@ -890,7 +883,7 @@
 </a>
 
 <!-- ================= SCRIPTS ================= -->
-<script src="/assets/js/main.js?v=20261010b" defer></script>
+<script src="/assets/js/main.js" defer></script>
 
 </body>
 </html>
