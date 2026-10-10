@@ -46,7 +46,7 @@
 </script>
 <link rel="preload" href="/assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/sora-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/styles.css?v=20261010-original-com-3d-2">
+<link rel="stylesheet" href="/assets/css/styles.css?v=20261010-pb-3d">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -61,6 +61,9 @@
   <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></symbol>
   <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="none"/></symbol>
   <symbol id="icon-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 9 8-4.5M12 12 4 7.5M12 12v9"/></symbol>
+  <symbol id="icon-orbit" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="3.6"/><path d="M12 3v18"/><path d="m18.6 6.4 1.2 3-3.2.4"/></symbol>
+  <symbol id="icon-zoom" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.9-4.9M10.5 7.5v6M7.5 10.5h6"/></symbol>
+  <symbol id="icon-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4.5h4.5"/></symbol>
 </svg>
 <!-- ================= HEADER ================= -->
 <header id="siteHeader">
@@ -226,43 +229,75 @@
 <!-- ================= PROJETO INTERATIVO 3D ================= -->
 <section class="projeto-3d sec-pad" id="projeto-3d">
   <div class="wrap">
-      <div class="projeto-3d-grid">
-        <div class="projeto-3d-copy reveal">
-          <h2 class="sec-title">Veja seu ambiente antes de ele existir</h2>
-          <p class="sec-body">Explore esta cozinha em 3D: gire, aproxime e observe cada detalhe. É assim que você aprova o seu projeto, vendo, não imaginando.</p>
-          <button class="projeto-3d-abrir" id="abrirCozinha3d" type="button">
-            <span id="abrirCozinha3dTexto">Explorar em 3D</span>
-            <svg class="icon" aria-hidden="true"><use href="#icon-cube"/></svg>
-          </button>
-        </div>
+    <div class="p3d">
+      <div class="p3d-copy reveal">
+        <h2 class="sec-title">Veja seu ambiente antes de ele existir.</h2>
+        <p class="sec-body">Explore esta cozinha em 3D: gire, aproxime e observe cada detalhe. É assim que você aprova o seu projeto, vendo, não imaginando.</p>
 
-      <div class="projeto-3d-stage reveal">
+        <ul class="p3d-gestos">
+          <li>
+            <svg class="icon" aria-hidden="true"><use href="#icon-orbit"/></svg>
+            <span><strong>Gire</strong> Arraste para ver a cozinha de todos os lados.</span>
+          </li>
+          <li>
+            <svg class="icon" aria-hidden="true"><use href="#icon-zoom"/></svg>
+            <span><strong>Aproxime</strong> Role ou use dois dedos para chegar nos acabamentos.</span>
+          </li>
+        </ul>
+
+        <div class="p3d-acao">
+          <button class="btn-primary p3d-abrir" id="abrirCozinha3d" type="button" aria-controls="cozinha3d">
+            <svg class="icon" aria-hidden="true"><use href="#icon-cube"/></svg>
+            <span id="abrirCozinha3dTexto">Explorar em 3D</span>
+          </button>
+          <a class="btn-primary p3d-pedir" id="pedirCozinha3d" hidden href="https://wa.me/5513991765368?text=Ol%C3%A1!%20Vi%20a%20cozinha%20em%203D%20no%20site%20da%20P.A.P%20e%20quero%20um%20projeto%20como%20este%20para%20o%20meu%20espa%C3%A7o." target="_blank" rel="noopener">
+            Quero um projeto como este
+            <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+          </a>
+          <p class="p3d-status" id="statusCozinha3d" aria-live="polite">Cerca de 13 MB. O modelo só carrega quando você abrir.</p>
+        </div>
+      </div>
+
+      <div class="p3d-stage reveal" id="p3dStage" data-state="idle">
+        <div class="p3d-floor" aria-hidden="true"></div>
         <model-viewer
           id="cozinha3d"
           src="/assets/3d/cozinha-planejada.glb"
-            poster="/assets/3d/cozinha-planejada-recorte-3d.webp"
           alt="Modelo 3D interativo de uma cozinha planejada grafite com detalhes em madeira e ilha central ripada"
           loading="lazy"
           reveal="manual"
           camera-controls
           touch-action="pan-y"
           interaction-prompt="none"
-            environment-image="neutral"
-            tone-mapping="aces"
-            camera-orbit="42deg 80deg 88%"
-            field-of-view="30deg"
-            min-camera-orbit="auto 45deg 78%"
-            max-camera-orbit="auto 88deg 165%"
-            shadow-intensity="1.8"
-            shadow-softness="0.55"
-            exposure="1.12"
-          >
-            <div class="projeto-3d-poster" slot="poster"></div>
-          </model-viewer>
-          <span class="projeto-3d-selo" aria-hidden="true">ESTUDO 3D</span>
-        <div class="projeto-3d-rodape">
-          <span id="statusCozinha3d" aria-live="polite">O modelo só será carregado quando você abrir.</span>
-          <span class="projeto-3d-gesto" aria-hidden="true">ARRASTE PARA GIRAR</span>
+          environment-image="neutral"
+          tone-mapping="aces"
+          camera-orbit="42deg 74deg 112%"
+          field-of-view="30deg"
+          min-camera-orbit="auto 45deg 78%"
+          max-camera-orbit="auto 88deg 165%"
+          auto-rotate-delay="0"
+          rotation-per-second="14deg"
+          shadow-intensity="1.4"
+          shadow-softness="0.8"
+          exposure="1.05"
+        >
+          <div class="p3d-poster" slot="poster"></div>
+          <div slot="progress-bar"></div>
+        </model-viewer>
+
+        <span class="p3d-tag" aria-hidden="true">Estudo 3D · Cozinha em U</span>
+        <span class="p3d-hint" aria-hidden="true">Arraste para girar</span>
+        <div class="p3d-progress" aria-hidden="true"><span id="p3dProgress"></span></div>
+
+        <div class="p3d-tools">
+          <button type="button" class="p3d-tool" id="p3dRotate" aria-pressed="false">
+            <svg class="icon" aria-hidden="true"><use href="#icon-orbit"/></svg>
+            Girar sozinho
+          </button>
+          <button type="button" class="p3d-tool" id="p3dReset">
+            <svg class="icon" aria-hidden="true"><use href="#icon-reset"/></svg>
+            Reiniciar vista
+          </button>
         </div>
       </div>
     </div>
@@ -849,7 +884,7 @@
 </a>
 
 <!-- ================= SCRIPTS ================= -->
-<script src="/assets/js/main.js?v=20261010-original-com-3d" defer></script>
+<script src="/assets/js/main.js?v=20261010-pb-3d" defer></script>
 
 </body>
 </html>

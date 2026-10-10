@@ -150,31 +150,74 @@ const loadModelViewer = () => {
   return modelViewerPromise;
 };
 
-if (cozinha3d && abrirCozinha3d && abrirCozinha3dTexto && statusCozinha3d) {
-  abrirCozinha3d.addEventListener('click', async () => {
+const p3dStage = document.getElementById('p3dStage');
+const p3dProgress = document.getElementById('p3dProgress');
+const p3dRotate = document.getElementById('p3dRotate');
+const p3dReset = document.getElementById('p3dReset');
+
+if (cozinha3d && p3dStage && abrirCozinha3d && abrirCozinha3dTexto && statusCozinha3d) {
+  const initialOrbit = cozinha3d.getAttribute('camera-orbit');
+  const initialFov = cozinha3d.getAttribute('field-of-view');
+
+  const fail = message => {
+    p3dStage.dataset.state = 'idle';
+    abrirCozinha3d.disabled = false;
+    abrirCozinha3dTexto.textContent = 'Tentar novamente';
+    statusCozinha3d.textContent = message;
+  };
+
+  const open3d = async () => {
+    if (p3dStage.dataset.state !== 'idle') return;
+    p3dStage.dataset.state = 'loading';
     abrirCozinha3d.disabled = true;
-    abrirCozinha3dTexto.textContent = 'Carregando 3D...';
-    statusCozinha3d.textContent = 'Preparando a visualização 3D.';
+    abrirCozinha3dTexto.textContent = 'Carregando 3D…';
+    statusCozinha3d.textContent = 'Baixando o modelo da cozinha.';
 
     try {
       await loadModelViewer();
       cozinha3d.dismissPoster();
     } catch (error) {
-      abrirCozinha3d.disabled = false;
-      abrirCozinha3dTexto.textContent = 'Tentar novamente';
-      statusCozinha3d.textContent = 'Não foi possível abrir o 3D. Verifique sua conexão e tente novamente.';
+      fail('Não foi possível abrir o 3D. Verifique sua conexão e tente novamente.');
+    }
+  };
+
+  abrirCozinha3d.addEventListener('click', open3d);
+  // Antes de abrir, o palco inteiro funciona como o botão.
+  p3dStage.addEventListener('click', () => { if (p3dStage.dataset.state === 'idle') open3d(); });
+
+  cozinha3d.addEventListener('progress', e => {
+    const p = e.detail.totalProgress;
+    p3dProgress?.style.setProperty('--p', p);
+    if (p3dStage.dataset.state === 'loading' && p < 1) {
+      statusCozinha3d.textContent = `Baixando o modelo da cozinha: ${Math.round(p * 100)}%.`;
     }
   });
 
   cozinha3d.addEventListener('load', () => {
-    abrirCozinha3dTexto.textContent = '3D aberto';
-    statusCozinha3d.textContent = 'Modelo carregado. Arraste para explorar todos os ângulos.';
+    p3dStage.dataset.state = 'ready';
+    // Com o 3D aberto, o botão vira o próximo passo: pedir um projeto assim.
+    const pedir = document.getElementById('pedirCozinha3d');
+    if (pedir) {
+      abrirCozinha3d.hidden = true;
+      pedir.hidden = false;
+    } else {
+      abrirCozinha3dTexto.textContent = '3D aberto';
+    }
+    statusCozinha3d.textContent = 'Pronto. Arraste para girar e role para aproximar.';
   });
 
-  cozinha3d.addEventListener('error', () => {
-    abrirCozinha3d.disabled = false;
-    abrirCozinha3dTexto.textContent = 'Tentar novamente';
-    statusCozinha3d.textContent = 'O modelo não carregou. Tente novamente em instantes.';
+  cozinha3d.addEventListener('error', () => fail('O modelo não carregou. Tente novamente em instantes.'));
+
+  p3dRotate?.addEventListener('click', () => {
+    const on = !cozinha3d.autoRotate;
+    cozinha3d.autoRotate = on;
+    p3dRotate.setAttribute('aria-pressed', String(on));
+  });
+
+  p3dReset?.addEventListener('click', () => {
+    cozinha3d.cameraOrbit = initialOrbit;
+    cozinha3d.fieldOfView = initialFov;
+    cozinha3d.cameraTarget = 'auto auto auto';
   });
 }
 

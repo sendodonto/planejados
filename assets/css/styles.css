@@ -16,14 +16,14 @@
 /* ================= TOKENS ================= */
 :root{
   --bg:#0a0a0a;
-  --surface:#111110;
-  --surface-2:#171715;
-  --text:#f2efe8;
-  --text-soft:rgba(242,239,232,.7);
-  --text-mute:#9a988f;
-  --line:rgba(242,239,232,.12);
-  --line-strong:rgba(242,239,232,.24);
-  --accent:#c6a87d;
+  --surface:#111111;
+  --surface-2:#181818;
+  --text:#f5f5f5;
+  --text-soft:rgba(245,245,245,.7);
+  --text-mute:#999999;
+  --line:rgba(245,245,245,.12);
+  --line-strong:rgba(245,245,245,.24);
+  --accent:#ffffff;
 
   --ease-out:cubic-bezier(.23,1,.32,1);
   --ease-in-out:cubic-bezier(.77,0,.175,1);
@@ -43,7 +43,7 @@ html{
   scroll-behavior:smooth;
   scroll-padding-top:var(--header-h);
   overflow-x:clip;
-  scrollbar-color:#34332f var(--bg);
+  scrollbar-color:#333333 var(--bg);
   -webkit-text-size-adjust:100%;
 }
 html.is-locked{overflow:hidden;}
@@ -63,8 +63,8 @@ body{
 ::selection{background:var(--accent);color:var(--bg);}
 ::-webkit-scrollbar{width:10px;height:10px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:#34332f;border:2px solid var(--bg);}
-::-webkit-scrollbar-thumb:hover{background:#4a4944;}
+::-webkit-scrollbar-thumb{background:#333333;border:2px solid var(--bg);}
+::-webkit-scrollbar-thumb:hover{background:#4a4a4a;}
 
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 
@@ -154,7 +154,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;}
 }
 .btn-primary,.header-cta,.modal-cta{background:var(--text);color:var(--bg);}
 .btn-secondary{
-  background:rgba(242,239,232,.06);
+  background:rgba(245,245,245,.06);
   color:var(--text);
   border:1px solid var(--line-strong);
   -webkit-backdrop-filter:blur(8px);
@@ -164,7 +164,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;}
 
 @media (hover:hover) and (pointer:fine){
   .btn-primary:hover,.header-cta:hover,.modal-cta:hover{background:#fff;}
-  .btn-secondary:hover{background:rgba(242,239,232,.14);border-color:rgba(242,239,232,.4);}
+  .btn-secondary:hover{background:rgba(245,245,245,.14);border-color:rgba(245,245,245,.4);}
   .modal-cta:hover .icon{transform:translateX(3px);}
 }
 
@@ -359,7 +359,7 @@ header.solid::before{opacity:0;}
 }
 .hero h1 .line > span{display:inline-block;}
 .hero .sub{
-  color:rgba(242,239,232,.8);
+  color:rgba(245,245,245,.8);
   font-size:16px;
   line-height:1.65;
   max-width:36ch;
@@ -462,125 +462,206 @@ header.solid::before{opacity:0;}
 .gcard:focus-visible{outline-offset:4px;}
 
 /* ================= PROJETO INTERATIVO 3D ================= */
+/* Um palco de estúdio: luz de cima, piso de prancheta e o modelo no centro. */
 .projeto-3d{background:var(--bg);overflow:clip;}
-.projeto-3d-grid{
+.p3d{display:grid;gap:40px;}
+
+.p3d-copy .sec-title{max-width:12ch;}
+.p3d-gestos{
+  list-style:none;
+  margin-top:32px;
+  border-top:1px solid var(--line);
+}
+.p3d-gestos li{
   display:grid;
-  grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);
-  align-items:stretch;
-  min-height:600px;
-  overflow:hidden;
-  border-radius:32px;
-  background:#d7c7b5;
+  grid-template-columns:24px minmax(0,1fr);
+  gap:16px;
+  align-items:start;
+  padding-block:18px;
+  border-bottom:1px solid var(--line);
+  color:var(--text-soft);
+  font-size:15px;
+  line-height:1.55;
 }
-.projeto-3d-copy{
-  position:relative;
-  z-index:2;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:center;
-  padding:clamp(48px,5vw,72px);
-}
-.projeto-3d-copy .sec-title{
-  max-width:10ch;
-  margin:0;
-  color:#221b17;
-  font-size:clamp(2.8rem,4.2vw,3.8rem);
-  line-height:.98;
-  letter-spacing:-.055em;
-}
-.projeto-3d-copy .sec-body{
-  max-width:34ch;
-  margin-top:30px;
-  color:rgba(34,27,23,.76);
-  font-size:clamp(1rem,1.25vw,1.2rem);
-  line-height:1.65;
-}
-.projeto-3d-stage{position:relative;min-width:0;background:transparent;}
-.projeto-3d-stage model-viewer{
-  position:relative;
+.p3d-gestos .icon{width:22px;height:22px;margin-top:1px;color:var(--text);}
+.p3d-gestos strong{
   display:block;
-  width:100%;
-  height:100%;
-  min-height:600px;
-  overflow:hidden;
-  border:0;
-  background:transparent;
-  --poster-color:transparent;
-  --progress-bar-color:var(--accent);
-  --progress-bar-height:3px;
+  margin-bottom:2px;
+  color:var(--text);
+  font-family:'Sora',sans-serif;
+  font-weight:600;
 }
-.projeto-3d-poster{
+
+.p3d-acao{margin-top:32px;}
+.p3d-abrir,.p3d-pedir{width:100%;}
+.p3d-abrir .icon{width:20px;height:20px;}
+.p3d-abrir:disabled{cursor:progress;opacity:.75;}
+.p3d-pedir .icon{transition:transform .25s var(--ease-out);}
+@media (hover:hover) and (pointer:fine){.p3d-pedir:hover .icon{transform:translateX(3px);}}
+.p3d-status{margin-top:14px;color:var(--text-mute);font-size:13px;line-height:1.5;}
+
+.p3d-stage{
+  position:relative;
+  isolation:isolate;
+  aspect-ratio:1/1;
+  max-height:560px;
+  width:100%;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(ellipse 55% 42% at 50% 58%,rgba(255,255,255,.11),rgba(255,255,255,0) 72%),
+    radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,255,255,.07),rgba(255,255,255,0) 70%),
+    linear-gradient(180deg,#161616 0%,#0c0c0c 100%);
+  cursor:pointer;
+}
+.p3d-stage[data-state="ready"]{cursor:grab;}
+.p3d-stage[data-state="ready"]:active{cursor:grabbing;}
+.p3d-stage[data-state="loading"]{cursor:progress;}
+
+/* Piso quadriculado em perspectiva, sumindo nas bordas. */
+.p3d-floor{
+  position:absolute;
+  z-index:-1;
+  left:-30%;
+  right:-30%;
+  bottom:-6%;
+  height:70%;
+  background-image:
+    linear-gradient(rgba(255,255,255,.085) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.085) 1px,transparent 1px);
+  background-size:56px 56px;
+  background-position:center bottom;
+  transform:perspective(700px) rotateX(64deg);
+  transform-origin:50% 100%;
+  -webkit-mask-image:radial-gradient(ellipse 50% 70% at 50% 45%,#000 10%,transparent 72%);
+  mask-image:radial-gradient(ellipse 50% 70% at 50% 45%,#000 10%,transparent 72%);
+  pointer-events:none;
+}
+
+.p3d-stage model-viewer{
   position:absolute;
   inset:0;
-  background:url('/assets/3d/cozinha-planejada-recorte-3d.webp') center / 100% auto no-repeat;
+  width:100%;
+  height:100%;
+  background:transparent;
+  --poster-color:transparent;
 }
-.projeto-3d-abrir{
-  position:static;
+.p3d-poster{
+  position:absolute;
+  inset:0;
+  background:url('/assets/3d/cozinha-planejada-recorte-3d.webp') 50% 56% / 84% auto no-repeat;
+  filter:drop-shadow(0 34px 30px rgba(0,0,0,.65));
+  transition:transform .9s var(--ease-out),opacity .4s ease;
+}
+
+.p3d-tag{
+  position:absolute;
+  top:20px;
+  left:20px;
+  color:var(--text-soft);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  pointer-events:none;
+}
+
+/* Carregamento: barra fina na base do palco, com o progresso real do modelo. */
+.p3d-progress{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:2px;
+  background:rgba(255,255,255,.1);
+  opacity:0;
+  transition:opacity .3s ease;
+  pointer-events:none;
+}
+.p3d-progress span{
+  display:block;
+  height:100%;
+  background:var(--text);
+  transform:scaleX(var(--p,0));
+  transform-origin:left;
+  transition:transform .25s var(--ease-out);
+}
+.p3d-stage[data-state="loading"] .p3d-progress{opacity:1;}
+.p3d-stage[data-state="loading"] .p3d-poster{opacity:.55;}
+
+.p3d-hint{
+  position:absolute;
+  left:50%;
+  bottom:84px;
+  padding:8px 14px;
+  border:1px solid var(--line-strong);
+  background:rgba(10,10,10,.7);
+  font-size:12px;
+  font-weight:500;
+  white-space:nowrap;
+  transform:translateX(-50%);
+  opacity:0;
+  pointer-events:none;
+}
+
+.p3d-tools{
+  position:absolute;
+  right:16px;
+  bottom:16px;
+  left:16px;
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(8px);
+  transition:opacity .3s ease,transform .5s var(--ease-out),visibility 0s linear .3s;
+}
+.p3d-stage[data-state="ready"] .p3d-tools{
+  opacity:1;
+  visibility:visible;
+  transform:none;
+  transition:opacity .4s ease .2s,transform .6s var(--ease-out) .2s,visibility 0s;
+}
+.p3d-tool{
   display:inline-flex;
   align-items:center;
-  justify-content:center;
-  gap:14px;
-  min-height:64px;
-  margin-top:32px;
-  padding:0 30px;
-  border:0;
-  border-radius:999px;
-  background:#29211c;
-  color:#fffaf3;
-  box-shadow:none;
-  font-size:15px;
-  font-weight:700;
-  letter-spacing:.01em;
-  text-transform:none;
+  gap:8px;
+  min-height:44px;
+  padding:0 16px;
+  border:1px solid var(--line-strong);
+  background:rgba(10,10,10,.72);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  font-size:13px;
+  font-weight:500;
   white-space:nowrap;
-  transition:background-color .18s ease,transform .16s var(--ease-out),opacity .18s ease;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .16s var(--ease-out);
 }
-.projeto-3d-abrir .icon{width:20px;height:20px;}
-.projeto-3d-abrir:active{transform:scale(.97);}
-.projeto-3d-abrir:disabled{cursor:wait;opacity:.72;}
-.projeto-3d-selo{
-  position:absolute;
-  right:28px;
-  bottom:26px;
-  z-index:3;
-  padding:12px 18px;
-  border-radius:999px;
-  background:rgba(247,239,229,.9);
-  color:#302720;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.18em;
-}
-.projeto-3d-rodape{
-  position:absolute;
-  width:1px;
-  height:1px;
-  overflow:hidden;
-  clip:rect(0 0 0 0);
-  clip-path:inset(50%);
-  white-space:nowrap;
-}
+.p3d-tool .icon{width:18px;height:18px;}
+.p3d-tool:active{transform:scale(.97);}
+.p3d-tool[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text);}
 @media (hover:hover) and (pointer:fine){
-  .projeto-3d-abrir:hover{background:#4d3d32;}
+  .p3d-stage[data-state="idle"]:hover .p3d-poster{transform:translateY(-6px) scale(1.015);}
+  .p3d-tool:not([aria-pressed="true"]):hover{background:rgba(245,245,245,.16);border-color:rgba(245,245,245,.45);}
 }
-@media (max-width:760px){
-  .projeto-3d .wrap{width:calc(100% - 40px);margin-inline:auto;padding-inline:0;}
-  .projeto-3d-grid{display:block;min-height:0;border-radius:30px;}
-  .projeto-3d-copy{padding:46px 22px 10px;}
-  .projeto-3d-copy .sec-title{max-width:none;font-size:clamp(2.1rem,8.6vw,2.75rem);line-height:1.02;}
-  .projeto-3d-copy .sec-body{max-width:32ch;margin-top:26px;font-size:1.02rem;line-height:1.58;}
-  .projeto-3d-abrir{min-height:62px;margin-top:30px;padding-inline:28px;font-size:15px;}
-  .projeto-3d-stage model-viewer{height:clamp(310px,86vw,410px);min-height:0;}
-  .projeto-3d-poster{background-size:92% auto;}
-  .projeto-3d-selo{right:22px;bottom:22px;}
+
+@media (prefers-reduced-motion:no-preference){
+  /* O momento da seção: o piso se desenha e a cozinha assenta sobre ele. */
+  .js .p3d-stage.reveal{transform:none;}
+  .js .p3d-stage .p3d-floor{transition:opacity 1.2s ease .15s,transform 1.4s var(--ease-out) .15s;}
+  .js .p3d-stage .p3d-poster{transition:transform 1.2s var(--ease-out) .3s,opacity .8s ease .3s;}
+  .js .p3d-stage:not(.is-visible) .p3d-floor{opacity:0;transform:perspective(700px) rotateX(78deg);}
+  .js .p3d-stage:not(.is-visible) .p3d-poster{opacity:0;transform:translateY(28px);}
+  .p3d-stage[data-state="ready"] .p3d-hint{animation:p3d-hint 3.6s var(--ease-out) .4s both;}
 }
-@media (max-width:390px){
-  .projeto-3d-copy{padding:42px 22px 8px;}
-  .projeto-3d-copy .sec-title{font-size:2.1rem;}
-  .projeto-3d-copy .sec-body{font-size:1rem;}
-  .projeto-3d-abrir{width:100%;padding-inline:20px;}
-  .projeto-3d-stage model-viewer{height:320px;}
+@keyframes p3d-hint{
+  0%{opacity:0;transform:translate(-50%,-6px);}
+  12%,78%{opacity:1;transform:translate(-50%,0);}
+  100%{opacity:0;transform:translate(-50%,0);}
+}
+
+@media (max-width:420px){
+  .p3d-tool{padding:0 12px;font-size:12.5px;}
+  .p3d-tag{top:16px;left:16px;}
 }
 
 /* ================= PORTFÓLIO ================= */
@@ -609,7 +690,7 @@ header.solid::before{opacity:0;}
 }
 .tab-btn.active{background:var(--text);color:var(--bg);border-color:var(--text);}
 @media (hover:hover) and (pointer:fine){
-  .tab-btn:not(.active):hover{color:var(--text);border-color:rgba(242,239,232,.45);}
+  .tab-btn:not(.active):hover{color:var(--text);border-color:rgba(245,245,245,.45);}
 }
 
 .portfolio-grid{
@@ -676,7 +757,7 @@ header.solid::before{opacity:0;}
   transition:background-color .18s ease,transform .16s var(--ease-out);
 }
 .modal-close .icon{width:20px;height:20px;}
-@media (hover:hover) and (pointer:fine){.modal-close:hover{background:rgba(242,239,232,.16);}}
+@media (hover:hover) and (pointer:fine){.modal-close:hover{background:rgba(245,245,245,.16);}}
 .modal-img-wrap{
   display:grid;
   place-items:center;
@@ -719,7 +800,7 @@ header.solid::before{opacity:0;}
   place-items:center;
   border-radius:50%;
   background:rgba(10,10,10,.55);
-  border:1px solid rgba(242,239,232,.35);
+  border:1px solid rgba(245,245,245,.35);
   -webkit-backdrop-filter:blur(6px);
   backdrop-filter:blur(6px);
   transform:translate(-50%,-50%);
@@ -914,6 +995,7 @@ footer{
 @media (min-width:600px){
   :root{--gutter:48px;}
   .hero-actions{flex-direction:row;flex-wrap:wrap;}
+  .p3d-abrir,.p3d-pedir{width:auto;}
   .gcard{flex-basis:46%;}
   .portfolio-grid{gap:40px 20px;}
   .video-grid{gap:36px 20px;}
@@ -927,13 +1009,15 @@ footer{
 
 /* ================= ≥ 960px ================= */
 @media (min-width:960px){
-  .projeto-3d-grid{grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:0;}
-  .projeto-3d-stage model-viewer{height:100%;min-height:600px;}
-
   :root{--gutter:56px;--header-h:80px;}
   .sec-pad{padding-block:128px;}
   .hero-content{padding-bottom:88px;}
   .hero .sub{font-size:18px;}
+
+  .p3d{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:center;}
+  .p3d-stage{aspect-ratio:5/4;max-height:none;}
+  .p3d-tag{top:24px;left:24px;}
+  .p3d-tools{right:20px;bottom:20px;}
 
   .marca-grid{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
   .marca-photo{margin-top:0;}
@@ -1026,10 +1110,4 @@ footer{
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   .seg-preview img{transform:none;filter:none;}
-}
-
-@media (max-width:520px){
-  .projeto-3d-stage model-viewer{height:320px;}
-  .projeto-3d-rodape{display:block;}
-  .projeto-3d-gesto{display:none;}
 }
