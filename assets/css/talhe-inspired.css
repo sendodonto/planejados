@@ -142,6 +142,11 @@ body { background: var(--pap-paper); color: var(--pap-ink); }
 .projeto-3d-grid { border-radius: var(--pap-radius); overflow: hidden; background: #d7c6b4; }
 .projeto-3d-copy { padding: clamp(30px, 5vw, 72px); }
 .projeto-3d-stage { background: #cbbba9; }
+.projeto-3d-poster {
+  background:
+    linear-gradient(0deg, rgba(18, 15, 13, .24), transparent 48%),
+    url('/assets/3d/cozinha-planejada-capa-3d.webp') center / cover no-repeat !important;
+}
 .portfolio-grid .pitem,
 .vframe,
 .seg-preview,
