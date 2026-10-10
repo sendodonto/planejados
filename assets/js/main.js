@@ -127,6 +127,55 @@ if (gallery) {
   }, true);
 }
 
+// Visualizador 3D: baixa a biblioteca e o modelo apenas após a ação do visitante.
+const cozinha3d = document.getElementById('cozinha3d');
+const abrirCozinha3d = document.getElementById('abrirCozinha3d');
+const statusCozinha3d = document.getElementById('statusCozinha3d');
+let modelViewerPromise;
+
+const loadModelViewer = () => {
+  if (customElements.get('model-viewer')) return Promise.resolve();
+  if (modelViewerPromise) return modelViewerPromise;
+
+  modelViewerPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js';
+    script.addEventListener('load', () => customElements.whenDefined('model-viewer').then(resolve));
+    script.addEventListener('error', reject);
+    document.head.appendChild(script);
+  });
+
+  return modelViewerPromise;
+};
+
+if (cozinha3d && abrirCozinha3d && statusCozinha3d) {
+  abrirCozinha3d.addEventListener('click', async () => {
+    abrirCozinha3d.disabled = true;
+    abrirCozinha3d.textContent = 'CARREGANDO MODELO...';
+    statusCozinha3d.textContent = 'Preparando a visualização 3D.';
+
+    try {
+      await loadModelViewer();
+      cozinha3d.dismissPoster();
+    } catch (error) {
+      abrirCozinha3d.disabled = false;
+      abrirCozinha3d.textContent = 'TENTAR NOVAMENTE';
+      statusCozinha3d.textContent = 'Não foi possível abrir o 3D. Verifique sua conexão e tente novamente.';
+    }
+  });
+
+  cozinha3d.addEventListener('load', () => {
+    statusCozinha3d.textContent = 'Modelo carregado. Arraste para explorar todos os ângulos.';
+  });
+
+  cozinha3d.addEventListener('error', () => {
+    abrirCozinha3d.disabled = false;
+    abrirCozinha3d.textContent = 'TENTAR NOVAMENTE';
+    statusCozinha3d.textContent = 'O modelo não carregou. Tente novamente em instantes.';
+  });
+}
+
 // Portfólio: filtros + "ver todos" na seleção inicial
 const filterBtns = document.querySelectorAll('#portfolioFilter .tab-btn');
 const portfolioItems = [...document.querySelectorAll('#portfolioGrid .pitem')];

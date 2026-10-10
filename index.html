@@ -221,6 +221,47 @@
     </div>
   </div>
 </section>
+
+<!-- ================= PROJETO INTERATIVO 3D ================= -->
+<section class="projeto-3d sec-pad" id="projeto-3d">
+  <div class="wrap">
+    <div class="projeto-3d-grid">
+      <div class="projeto-3d-copy reveal">
+        <p class="projeto-3d-label">VISUALIZAÇÃO INTERATIVA</p>
+        <h2 class="sec-title">Veja o projeto antes de ele sair do papel.</h2>
+        <p class="sec-body">Explore uma cozinha planejada em 3D e observe a distribuição dos armários, a ilha central e cada escolha de acabamento.</p>
+        <p class="projeto-3d-nota">No computador, arraste com o mouse. No celular, mova com um dedo e use dois dedos para aproximar.</p>
+      </div>
+
+      <div class="projeto-3d-stage reveal">
+        <model-viewer
+          id="cozinha3d"
+          src="/assets/3d/cozinha-planejada.glb"
+          poster="/assets/3d/cozinha-planejada-poster.webp"
+          alt="Modelo 3D interativo de uma cozinha planejada grafite com detalhes em madeira e ilha central ripada"
+          loading="lazy"
+          reveal="manual"
+          camera-controls
+          touch-action="pan-y"
+          interaction-prompt="none"
+          shadow-intensity="1"
+          exposure="1"
+        >
+          <div class="projeto-3d-poster" slot="poster">
+            <button class="projeto-3d-abrir" id="abrirCozinha3d" type="button">
+              EXPLORAR COZINHA EM 3D
+            </button>
+          </div>
+        </model-viewer>
+        <div class="projeto-3d-rodape">
+          <span id="statusCozinha3d" aria-live="polite">O modelo só será carregado quando você abrir.</span>
+          <span class="projeto-3d-gesto" aria-hidden="true">ARRASTE PARA GIRAR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= PORTFÓLIO COMPLETO INTERATIVO ================= -->
 <section class="portfolio-sec sec-pad" id="portfolio">
   <div class="wrap">
