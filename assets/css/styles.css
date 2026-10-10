@@ -15,15 +15,18 @@
 
 /* ================= TOKENS ================= */
 :root{
-  --bg:#0a0a0a;
-  --surface:#111110;
-  --surface-2:#171715;
-  --text:#f2efe8;
-  --text-soft:rgba(242,239,232,.7);
-  --text-mute:#9a988f;
-  --line:rgba(242,239,232,.12);
-  --line-strong:rgba(242,239,232,.24);
-  --accent:#c6a87d;
+  --bg:#eee9e1;
+  --surface:#faf8f4;
+  --surface-2:#ded4c7;
+  --text:#2d2119;
+  --text-soft:rgba(45,33,25,.72);
+  --text-mute:#756a61;
+  --line:rgba(45,33,25,.13);
+  --line-strong:rgba(45,33,25,.26);
+  --accent:#8a5b3c;
+  --brown:#39271d;
+  --paper:#f7f4ef;
+  --radius:18px;
 
   --ease-out:cubic-bezier(.23,1,.32,1);
   --ease-in-out:cubic-bezier(.77,0,.175,1);
@@ -115,7 +118,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;}
   padding-inline:var(--gutter);
 }
 
-.sec-pad{padding-block:88px;}
+.sec-pad{padding-block:96px;}
 
 .sec-title{
   font-size:clamp(30px,4.2vw,52px);
@@ -961,4 +964,168 @@ footer{
   .projeto-3d-stage model-viewer{height:420px;}
   .projeto-3d-rodape{display:block;}
   .projeto-3d-gesto{display:none;}
+}
+
+/* ================= DIREÇÃO EDITORIAL CLARA =================
+   Inspirada em interiores residenciais quentes: fotografia primeiro,
+   tipografia serena e superfícies que lembram papel e madeira. */
+.hero h1,.sec-title,.cta-final h2{
+  font-family:Georgia,'Times New Roman',serif;
+  font-weight:400;
+}
+
+.sec-title{
+  font-size:clamp(34px,4.5vw,58px);
+  line-height:1.04;
+  letter-spacing:-.035em;
+}
+
+.btn-primary,.header-cta,.modal-cta{background:var(--brown);color:var(--paper);}
+.btn-secondary{background:transparent;color:var(--text);}
+.logo img{filter:brightness(0) saturate(100%) sepia(18%) saturate(650%) hue-rotate(338deg) brightness(54%);}
+
+header{color:var(--text);transition:background-color .35s ease,border-color .35s ease,box-shadow .35s ease;}
+header::before{background:linear-gradient(180deg,rgba(238,233,225,.96),rgba(238,233,225,0));}
+header.solid{
+  background:rgba(250,248,244,.9);
+  border-bottom-color:var(--line);
+  box-shadow:0 10px 30px rgba(57,39,29,.05);
+}
+.nav-drawer{background:var(--paper);}
+
+.hero{
+  min-height:auto;
+  padding-top:var(--header-h);
+  justify-content:flex-start;
+  background:var(--bg);
+}
+.hero-photo{
+  position:relative;
+  inset:auto;
+  order:2;
+  min-height:52svh;
+  margin:0 var(--gutter) var(--gutter);
+  overflow:hidden;
+  border-radius:var(--radius);
+  z-index:auto;
+}
+.hero-photo img{filter:contrast(1.02) saturate(.9) brightness(1.03);}
+.hero-photo::after{background:linear-gradient(180deg,transparent 58%,rgba(45,33,25,.14));}
+.hero-content{order:1;padding:72px var(--gutter) 48px;}
+.hero-kicker{
+  margin-bottom:22px;
+  color:var(--accent);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.14em;
+}
+.hero h1{
+  font-size:clamp(46px,7vw,92px);
+  font-weight:400;
+  line-height:.96;
+  letter-spacing:-.055em;
+}
+.hero .sub{color:var(--text-soft);}
+.hero-proof{margin-top:24px;color:var(--text-mute);font-size:12px;line-height:1.5;max-width:42ch;}
+
+.marca,.projeto-3d,.videos-sec,.diferenciais,.social{background:var(--surface);}
+.projetos,.portfolio-sec,.segmentos,.processo,.insta{background:var(--bg);}
+
+.marca-photo,.gcard .frame,.pitem .pframe,.vcard .vframe,.craft-card,.seg-preview{
+  border-radius:var(--radius);
+}
+.marca-photo,.gcard .frame,.pitem .pframe,.vcard .vframe,.seg-preview{overflow:hidden;}
+.craft-card{overflow:hidden;}
+
+.ctrl-btn{border-radius:50%;}
+.tab-btn{border-radius:8px;}
+.tab-btn.active{background:var(--brown);color:var(--paper);border-color:var(--brown);}
+
+.projeto-3d-grid{align-items:center;}
+.projeto-3d-label{color:var(--accent);font-weight:700;}
+.projeto-3d-stage model-viewer{
+  background:
+    radial-gradient(ellipse at 50% 84%,rgba(57,39,29,.18),transparent 34%),
+    linear-gradient(145deg,#e6ddd1 0%,#faf8f3 52%,#d8ccbd 100%);
+  border:1px solid rgba(45,33,25,.1);
+  border-radius:24px;
+  box-shadow:0 30px 74px -44px rgba(57,39,29,.62);
+  --poster-color:#e7ded2;
+}
+.projeto-3d-poster{
+  border-radius:inherit;
+  background:linear-gradient(0deg,rgba(45,33,25,.22),transparent 48%),url('/assets/3d/cozinha-planejada-poster.webp') center / cover no-repeat;
+}
+.projeto-3d-abrir{
+  background:rgba(250,248,244,.93);
+  color:var(--brown);
+  border-color:rgba(45,33,25,.2);
+  border-radius:8px;
+  box-shadow:0 12px 30px rgba(57,39,29,.2);
+}
+
+.modal{background:rgba(45,33,25,.72);}
+.modal-dialog{background:var(--paper);border-radius:var(--radius);}
+.modal-img-wrap{background:#ded4c7;}
+.modal-close{background:rgba(250,248,244,.88);color:var(--brown);border-color:rgba(45,33,25,.15);border-radius:50%;}
+.vcard .play-hint{background:rgba(57,39,29,.62);border-color:rgba(255,255,255,.5);color:#fff;}
+
+.insta-grid .cell{border-radius:12px;}
+.cta-final{background:#d8c5b2;}
+
+footer{background:var(--brown);color:var(--paper);border-top:0;}
+footer .foot-about{color:rgba(247,244,239,.66);}
+footer .foot-links a{color:rgba(247,244,239,.76);}
+footer .foot-meta{color:rgba(247,244,239,.62);}
+footer .foot-meta strong,footer .foot-meta a{color:var(--paper);}
+footer .foot-meta a{text-decoration-color:rgba(247,244,239,.3);}
+footer .foot-bottom{color:rgba(247,244,239,.58);border-top-color:rgba(247,244,239,.14);}
+
+@media (hover:hover) and (pointer:fine){
+  .btn-primary:hover,.header-cta:hover,.modal-cta:hover{background:#523824;}
+  .btn-secondary:hover{background:rgba(45,33,25,.06);border-color:rgba(45,33,25,.42);}
+  .ctrl-btn:not(:disabled):hover{background:var(--brown);color:var(--paper);border-color:var(--brown);}
+  .tab-btn:not(.active):hover{color:var(--text);border-color:rgba(45,33,25,.42);}
+  .projeto-3d-abrir:hover{background:var(--brown);color:var(--paper);}
+  .modal-close:hover{background:#fff;}
+}
+
+@media (min-width:960px){
+  .hero{
+    min-height:min(900px,100svh);
+    display:grid;
+    grid-template-columns:minmax(390px,42%) minmax(0,58%);
+    padding:calc(var(--header-h) + 24px) 24px 24px;
+    align-items:stretch;
+  }
+  .hero-content{
+    grid-column:1;
+    grid-row:1;
+    align-self:center;
+    padding:clamp(48px,7vw,104px) clamp(40px,6vw,96px);
+    max-width:660px;
+  }
+  .hero-photo{
+    grid-column:2;
+    grid-row:1;
+    min-height:0;
+    height:100%;
+    margin:0;
+  }
+  .hero-photo img{object-position:center 46%;}
+  .hero h1{font-size:clamp(58px,6.1vw,92px);max-width:8.8ch;}
+  .hero .sub{font-size:17px;max-width:34ch;}
+  .sec-pad{padding-block:120px;}
+  .marca-grid{grid-template-columns:.9fr 1.1fr;gap:clamp(72px,9vw,132px);}
+  .marca-photo{aspect-ratio:5/6;}
+  .projeto-3d-grid{grid-template-columns:minmax(280px,.72fr) minmax(0,1.6fr);gap:clamp(64px,8vw,120px);}
+  .projeto-3d-stage model-viewer{height:min(58vw,680px);}
+}
+
+@media (max-width:599px){
+  .hero-content{padding-top:54px;}
+  .hero-photo{min-height:46svh;}
+  .hero-kicker{font-size:10px;}
+  .sec-pad{padding-block:80px;}
+  .projeto-3d-stage model-viewer{height:460px;}
 }
